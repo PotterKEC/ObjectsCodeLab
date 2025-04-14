@@ -1,40 +1,66 @@
+// src/main/java/Assignment.java
+
+import java.util.Scanner;
+// If students create Question.java in a package (e.g., com.example), uncomment the line below
+// import com.example.Question;
+
+/**
+ * A simple class to demonstrate the usage of the Question class.
+ * Students should create the Question.java file.
+ */
 public class Assignment {
-    // These variables will be used in the conditions
-    private int number1 = 42;
-    private int number2 = 7;
-    private double decimal = 3.14;
-    private String text = "123";
 
-    public void runConditions() {
-        // Condition 1: Use comparison between number1 and number2
-        if ( /* Your condition here */ ) {
-            System.out.println("First condition passed!");
+    public static void main(String[] args) {
+        // Create a Scanner object to read user input
+        Scanner inputScanner = new Scanner(System.in);
+        int totalScore = 0;
+        int maxScore = 0;
+
+        System.out.println("--- Simple Quiz ---");
+
+        // --- Question 1 ---
+        // Assuming the Question class has a constructor:
+        // Question(String questionText, int marks, String correctAnswer)
+        try {
+            Question q1 = new Question("What is the capital of Canada?", 5, "Ottawa");
+            maxScore += q1.totalMarks; // Add question's marks to max score
+
+            q1.AskQuestion(inputScanner); // Ask the question and get the student's answer
+            int score1 = q1.CheckAnswer(); // Check the answer
+            totalScore += score1; // Add the score obtained to the total
+
+            System.out.println("Your score for this question: " + score1 + "/" + q1.totalMarks);
+            System.out.println("--------------------");
+
+
+            // --- Question 2 ---
+            Question q2 = new Question("What is 2 + 2?", 2, "4");
+            maxScore += q2.totalMarks;
+
+            q2.AskQuestion(inputScanner);
+            int score2 = q2.CheckAnswer();
+            totalScore += score2;
+
+            System.out.println("Your score for this question: " + score2 + "/" + q2.totalMarks);
+            System.out.println("--------------------");
+
+            // Add more questions as needed...
+
+        }  catch (NoSuchMethodError e) {
+             System.err.println("Error: A required method or constructor in the Question class is missing or has the wrong signature.");
+             System.err.println("Please check the requirements for the Question class constructor and methods.");
+        } catch (Exception e) {
+            System.err.println("An unexpected error occurred: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Close the scanner
+             if (inputScanner != null) {
+                inputScanner.close();
+             }
         }
 
-        // Condition 2: Convert text to integer and compare with number1
-        if ( /* Your condition here */ ) {
-            System.out.println("Second condition passed!");
-        }
 
-        // Condition 3: Use decimal in a comparison
-        if ( /* Your condition here */ ) {
-            System.out.println("Third condition passed!");
-        }
-
-        // Condition 4: Compare number2 cast to double with decimal
-        if ( /* Your condition here */ ) {
-            System.out.println("Fourth condition passed!");
-        }
-
-        // Condition 5: Use multiple comparisons with AND operator
-        if ( /* Your condition here */ ) {
-            System.out.println("Fifth condition passed!");
-        }
+        System.out.println("--- Quiz Finished ---");
+        System.out.println("Your final score: " + totalScore + "/" + maxScore);
     }
-
-    // Getter methods for testing
-    public int getNumber1() { return number1; }
-    public int getNumber2() { return number2; }
-    public double getDecimal() { return decimal; }
-    public String getText() { return text; }
 }
